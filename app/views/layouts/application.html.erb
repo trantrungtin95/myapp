@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Myapp</title>
+    <title>Books_Store</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,7 +9,21 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <body id="store">
+    <div id="banner">
+        <%= image_tag("JPD1.jpg") %>
+        <%= @page_title || "Books Store" %>
+    </div>
+    <div id="columns">
+        <div id="side">
+            <a href="#">Home</a><br />
+            <a href="#">FAQ</a><br />
+            <a href="#">News</a><br />
+            <a href="#">Contact</a><br />
+        </div>
+        <div id="main">
+            <%= yield %>
+        </div>
+    </div> 
+</body>
 </html>

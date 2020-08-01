@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @product.title %>
-</p>
+
 
 <p>
   <strong>Description:</strong>
@@ -12,7 +9,12 @@
 
 <p>
   <strong>Image url:</strong>
-  <%= @product.image_url %>
+  <%= image_tag @product.image_url %>
+</p>
+
+<p>
+  <strong>Cover:</strong>
+  <%= image_tag @product.cover if @product.cover.present? %>
 </p>
 
 <p>

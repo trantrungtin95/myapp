@@ -4,12 +4,14 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    puts "======================================"
     @products = Product.all
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
+    ###
   end
 
   # GET /products/new
@@ -42,6 +44,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
+        
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -69,6 +72,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :description, :image_url, :price)
+      params.require(:product).permit(:title, :description, :image_url, :price, :cover)
     end
 end
