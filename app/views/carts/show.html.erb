@@ -2,8 +2,8 @@
 
 <h2>Your cart</h2>
 <ul>
-    <% @cart.line_items.each do |a| %>
-    <li><%= a.product.title %></li>
+    <% @cart.line_items.each do |line_item| %>
+    <li><%= line_item.quantity %> x <%= line_item.product.title %></li>
     <% end %>
 </ul>
 
