@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+    before_action :authorize
+
     private
      
     def current_cart
@@ -9,4 +11,13 @@ class ApplicationController < ActionController::Base
         cart
     end
     helper_method :current_cart
+
+    protected
+  
+    def authorize
+        @user = User.find_by_id(session[:user_id]) 
+        if @user == nil
+            redirect_to '/login', :notice => 'You must login first'
+        end
+    end
 end
