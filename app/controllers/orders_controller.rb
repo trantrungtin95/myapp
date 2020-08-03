@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
   end
 
   # GET /orders/1
@@ -34,18 +34,19 @@ class OrdersController < ApplicationController
     @order.add_line_items_from_cart(current_cart)
 
     respond_to do |format|
-      if @order.save
-        Cart.destroy(session[:cart_id])
-        session[:cart_id] = nil
-
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+        if @order.save
+            Cart.destroy(session[:cart_id])
+            session[:cart_id] = nil
+            Notifier.order_received(@order).deliver_now
+            format.html { redirect_to '/', notice: 'Thank you for your order' }
+            format.json { render :show, status: :created, location: @order }
+        else
+            format.html { render :new }
+            format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
     end
   end
+
 
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
