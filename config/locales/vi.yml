@@ -1,0 +1,54 @@
+vi:
+  layouts:
+    application:
+      home: "Trang chủ"
+      title: "Books Store"
+      faq: "Hỏi đáp"
+      news: "Tin tức"
+      contact: "Liên hệ"
+  store:
+    index:
+      title: "Sản phẩm"
+      add: "Thêm vào giỏ hàng"
+  
+  carts:
+    cart:
+      title: "Giỏ hàng"
+      empty_cart: "Xóa giỏ hàng"
+      checkout: "Thanh toán"
+  number:
+    currency:
+      format:
+        unit: đồng
+        precision: 3
+        separator: ","
+        delimiter: "."
+        format: "%n %u"
+  orders:
+    new:
+      legend: "Thông tin thanh toán"
+    form:
+      name: "Tên"
+      address: "Địa chỉ"
+      pay_type: "Thanh toán"
+      pay_type_combo: "Chọn phương thức thanh toán"
+      submit: "Đặt hàng"
+  activerecord: 
+    models:
+      order: "Đơn hàng"
+    attributes:
+      order:
+        name: "Tên"
+        address: "Địa chỉ"
+        email: "Email"
+        pay_type: "Phương thức thanh toán"
+    errors: 
+      messages:
+        blank: "không được để trống"
+        inclusion: "không thuộc danh sách cho trước" 
+      template: 
+        body: "Lỗi xảy ra ở các trường sau:"
+      header:
+        one: "1 lỗi xảy ra"
+        other: "%{count} lỗi xảy ra"
+  thanks: "Cám ơn bạn đã đặt hàng"  

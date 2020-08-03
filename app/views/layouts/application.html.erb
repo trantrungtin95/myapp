@@ -15,7 +15,7 @@
   <body id="store">
     <div id="banner">
         <%= image_tag("JPD1.jpg") %>
-        <%= @page_title || "Books Store" %>
+        <%= @page_title || t('.title') %>
     </div>
     <div id="columns">
         <div id="side">
@@ -26,11 +26,23 @@
                 </p>
                 <% end %>
             </div>
-            <a href="/">Home</a><br />
+            <a href="/"><%= t('.home') %></a><br />
             <%= link_to 'FAQ', faq_statics_path %>
             <br />
-            <a href="#">News</a><br />
-            <a href="#">Contact</a><br />
+            <a href="#"><%= t('.news') %></a><br />
+            <a href="#"><%= t('.contact') %></a><br />
+
+            <% if session[:user_id] %>
+                <br/>
+                <%= link_to 'Orders', '/orders' %><br />
+                <%= link_to 'Products', '/products' %><br />
+                <%= link_to 'Users', '/users' %><br />
+                <%= button_to 'Logout', '/logout', :method => :delete %>
+                <br/>
+            <% else %>
+                <br/>
+                <%= link_to 'Log In', login_path %><br />
+            <% end %>
         </div>
         <div id="main">
             <%= yield %>
