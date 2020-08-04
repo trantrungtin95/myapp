@@ -1,4 +1,6 @@
-<%= simple_form_for([@product, @product.reviews.build]) do |f| %>
+<h1>Edit Review</h1>
+
+<%= simple_form_for([@product, @review]) do |f| %>
    <%= f.input :rating %>
    <%= f.input :comment %>
    <%= f.button :submit %>
