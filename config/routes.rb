@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   end
 
   get 'store/index'
-  resources :products
+  resources :products do
+    resources :reviews
+  end
   root :to => 'store#index'
   get 'say/hello'
   get 'say/goodbye'

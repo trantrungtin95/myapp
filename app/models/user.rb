@@ -1,6 +1,7 @@
 require 'digest/sha2'
 
 class User < ApplicationRecord
+    has_many :reviews
     validates :name, :presence => true, :uniqueness => true
     validates :password, :confirmation => true
     attr_accessor :password_confirmation
@@ -28,7 +29,7 @@ class User < ApplicationRecord
             end
         end
     end
-    
+
     after_destroy :check_user_empty
   
     def check_user_empty
@@ -37,7 +38,7 @@ class User < ApplicationRecord
         end
     end
  
-private
+    private
     def password_must_be_present 
         if hashed_password.present? == false
             errors.add(:password, "Missing password")
