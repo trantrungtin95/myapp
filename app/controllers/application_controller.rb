@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def current_user
+      @user
+    end
+
     def set_i18n_locale 
         if params[:locale] 
             if I18n.available_locales.include?(params[:locale].to_sym)

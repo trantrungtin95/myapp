@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
     before_action :find_product
-    before_action :find_review, only: [:edit, :update, :destroy]
+    before_action :find_review, only: [:edit, :update, :destroy, :like]
     def new
         @review = Review.new
     end
@@ -33,10 +33,23 @@ class ReviewsController < ApplicationController
       end
     end
 
+    def like
+      # get like from db
+      # if user already like, do nothing. Otherwise, increase 1
+      # save like to db
+
+      if @review.likes.where(user_id: current_user.id).count > 0
+        # do nothing
+      else
+        @review.likes.create(user_id: current_user.id)
+      end
+      redirect_to product_path(@product)
+    end
+
     private
 
       def review_params
-        params.require(:review).permit(:rating, :comment)
+        params.require(:review).permit(:rating, :comment, :user_id, :like)
       end
 
       def find_product
@@ -45,6 +58,6 @@ class ReviewsController < ApplicationController
 
       def find_review
         @review = Review.find(params[:id])
-      end
+      end    
     
 end

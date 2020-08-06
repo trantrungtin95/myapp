@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   get 'store/index'
   resources :products do
-    resources :reviews
+    resources :reviews do
+      get :like, on: :member  # on: :collection ==> action for many elements
+    end
   end
   root :to => 'store#index'
   get 'say/hello'
