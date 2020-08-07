@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
     def current_user
       @user
     end
+    helper_method :current_user
 
     def set_i18n_locale 
         if params[:locale] 

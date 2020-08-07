@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
     before_action :find_product
-    before_action :find_review, only: [:edit, :update, :destroy, :like]
+    before_action :find_review, only: [:edit, :update, :destroy, :like, :dislike]
     def new
         @review = Review.new
     end
@@ -38,13 +38,21 @@ class ReviewsController < ApplicationController
       # if user already like, do nothing. Otherwise, increase 1
       # save like to db
 
-      if @review.likes.where(user_id: current_user.id).count > 0
+      if @review.like_by?(current_user)
         # do nothing
       else
         @review.likes.create(user_id: current_user.id)
       end
       redirect_to product_path(@product)
     end
+
+    def dislike
+      if @review.like_by?(current_user)
+        @review.likes.where(user_id: current_user.id).destroy_all
+      end
+      redirect_to product_path(@product)
+    end
+
 
     private
 

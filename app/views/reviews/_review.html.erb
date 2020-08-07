@@ -1,7 +1,15 @@
+<p><%= review.rating %></p>
 <p><%= review.comment %></p>
 <%if review.user_id == @user.id%>
     <%= link_to 'Delete',  product_review_path(@product, review), method: :delete, data: {confirm: "Are you sure?"} %>
     <%= link_to 'Edit',  edit_product_review_path(@product, review) %> 
 <% end %>
 <p>Like count:<%= review.like_count %></p>
-<%= link_to 'Like', like_product_review_path(@product, review) %>
+
+<% if review.like_by?(current_user) %>
+  <%= link_to 'DisLike', dislike_product_review_path(@product, review)  %>
+<% else %>
+  <%= link_to 'Like', like_product_review_path(@product, review) %>
+<% end %>
+
+<hr />

@@ -1,12 +1,6 @@
-<%= simple_form_for([@product, @product.reviews.build]) do |f| %>
-   <label for="rating">Rating:</label>
-   <select  id="rating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-   </select>
+<% review = @product.reviews.build %>
+<%= simple_form_for([@product, review ]) do |f| %>
+   <%= f.input :rating, collection: 1..5 %>   
    <%= f.input :user_id, as: :hidden, :input_html => {:value => @user.id } %>
    <%= f.input :comment %>
    <%= f.button :submit %>

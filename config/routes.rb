@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :products do
     resources :reviews do
       get :like, on: :member  # on: :collection ==> action for many elements
+      get :dislike, on: :member
     end
   end
   root :to => 'store#index'
