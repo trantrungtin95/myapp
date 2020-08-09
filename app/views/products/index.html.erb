@@ -1,6 +1,14 @@
 <div id="product_list">
     <h1>Products</h1>
-  
+
+
+    <div align="right">
+            <%= form_tag(products_path, :method => "get") do %>
+               <%= label_tag(:q, "Search:") %>
+               <%= text_field_tag(:q) %>
+               <%= submit_tag("Search") %>
+            <% end %>
+    </div>
     <table>
     <% @products.each do |product| %>
         <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
@@ -11,14 +19,14 @@
   
             <td class="list_description">
                 <dl>
-                    <dt><%= product.title %></dt>
+                    <dt><%= product.title%></dt>
                     <dd><%= truncate(strip_tags(product.description),
                             :length => 80) %></dd>
                 </dl>
             </td>
-  
+    
             <td class="list_actions">
-                <%= link_to 'Show', product %><br/>
+                <%= link_to 'Show',luotxem_product_path(product) %><br/>
                 <%= link_to 'Edit', edit_product_path(product) %><br/>
                 <%= link_to 'Destroy', product, 
                     data: { confirm: 'Are you sure?' },

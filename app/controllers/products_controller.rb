@@ -1,11 +1,14 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :luotxem]
 
   # GET /products
   # GET /products.json
   def index
     puts "======================================"
     @products = Product.all
+    if params['q'].present?
+      @products = Product.find_title(params['q'])
+    end
   end
 
   # GET /products/1
@@ -63,6 +66,25 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  def luotxem
+    @product.luotxem.create(user_id: current_user.id)
+    redirect_to product_path(@product)
+  end
+
+  # def self.searches(pattern)
+  #   if pattern.blank?  
+  #     all
+  #   else
+  #     where('name LIKE ?', "%#{pattern}%")
+  #   end
+  # end
+  
+  # def search
+  #   Product.find_title(params['q'])
+  # end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -75,4 +97,4 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:title, :description, :image_url, :price, :cover)
     end
   
-end
+end  
