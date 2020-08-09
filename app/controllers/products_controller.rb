@@ -67,11 +67,15 @@ class ProductsController < ApplicationController
     end
   end
   
-  
   def luotxem
     @product.luotxem.create(user_id: current_user.id)
     redirect_to product_path(@product)
   end
+
+  # def luotxem_count
+  #   @luotxems.count
+  # end
+  
 
   # def self.searches(pattern)
   #   if pattern.blank?  

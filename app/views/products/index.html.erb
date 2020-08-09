@@ -2,13 +2,6 @@
     <h1>Products</h1>
 
 
-    <div align="right">
-            <%= form_tag(products_path, :method => "get") do %>
-               <%= label_tag(:q, "Search:") %>
-               <%= text_field_tag(:q) %>
-               <%= submit_tag("Search") %>
-            <% end %>
-    </div>
     <table>
     <% @products.each do |product| %>
         <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">

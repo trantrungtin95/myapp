@@ -44,6 +44,13 @@
                 <%= link_to 'Log In', login_path %><br />
             <% end %>
         </div>
+        <div align="left">
+            <%= form_tag(products_path, :method => "get") do %>
+               <%= label_tag(:q, "Search:") %>
+               <%= text_field_tag(:q) %>
+               <%= submit_tag("Search") %>
+            <% end %>
+        </div>
         <div id="main">
             <%= yield %>
         </div>

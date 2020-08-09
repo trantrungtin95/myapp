@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
     has_many :reviews
     has_one_attached :cover
+    has_many :luotxem
     validates :title, :description, :image_url, :presence => true
     validates :price, :numericality =>{:greater_than_or_equal_to => 1.0}
     validates :title, :uniqueness => true
@@ -11,6 +12,17 @@ class Product < ActiveRecord::Base
 
     has_many :line_items
     before_destroy :check_if_has_line_item
+
+    scope :find_title, ->(search){where "title iLIKE ?", "%#{search}%"}
+    # Ex:- scope :active, -> {where(:active => true)}
+
+    # def luotxem
+    #     @product.luotxem.create(user_id: current_user.id)
+    #     redirect_to product_path(@product)
+    # end
+    def luotxem_count
+        luotxem.count
+    end
   
      private
   

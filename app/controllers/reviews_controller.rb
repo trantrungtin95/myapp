@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
     before_action :find_product
     before_action :find_review, only: [:edit, :update, :destroy, :like, :dislike]
+    
     def new
         @review = Review.new
     end

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :like, on: :member  # on: :collection ==> action for many elements
       get :dislike, on: :member
     end
+    get :luotxem, on: :member
   end
   root :to => 'store#index'
   get 'say/hello'
