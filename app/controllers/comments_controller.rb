@@ -7,8 +7,7 @@ class CommentsController < ApplicationController
     end
 
     def create
-        @comment = Comment.new(review_params)
-        @product.review_id = params[:review_id]
+        @comment = Comment.new(comment_params)
 
         if @comment.save
             redirect_to product_path(@product)
@@ -37,10 +36,11 @@ class CommentsController < ApplicationController
     private
 
       def comment_params
-        params.require(:comment).permit( :user_id, :review_id)
+        params.require(:comment).permit( :user_id, :review_id, :content)
       end
 
       def find_review
+        @product = Product.find(params[:product_id])
         @review = Review.find(params[:review_id])
       end
 

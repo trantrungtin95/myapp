@@ -19,7 +19,8 @@ Rails.application.routes.draw do
     resources :reviews do
       get :like, on: :member  # on: :collection ==> action for many elements
       get :dislike, on: :member
-      get :comments, on: :member
+      
+      resources :comments
     end
     get :luotxem, on: :member
   end

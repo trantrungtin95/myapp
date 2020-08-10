@@ -1,5 +1,5 @@
 <% comment = @review.comments.build %>
-<%= simple_form_for  ([@review, comment]) do |f| %>
+<%= simple_form_for [@product, @review, comment] do |f| %>
   <%= f.input :content %>
   <%= f.input :user_id, as: :hidden, :input_html => {:value => @user.id } %>
   <%= f.input :review_id, as: :hidden, :input_html => {:value => @review.id } %>
