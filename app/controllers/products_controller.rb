@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @product.luotxem.create(user_id: current_user.id)
     ###
   end
 
@@ -65,11 +66,6 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-  
-  def luotxem
-    @product.luotxem.create(user_id: current_user.id)
-    redirect_to product_path(@product)
   end
 
 
