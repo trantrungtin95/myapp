@@ -13,8 +13,13 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   # GET /products/1.json
+  # Avoid spam: captcha. Prove that you're human
   def show
-    @product.luotxem.create(user_id: current_user.id)
+    # @product.luotxem.create(user_id: current_user.id)
+    # Migrate old data. Script: copy luottxem ---> daxem
+    
+    new_views = (@product.daxem.present? ? @product.daxem : 0) + 1
+    @product.update(daxem: new_views)
     ###
   end
 
