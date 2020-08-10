@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
     before_action :find_product
-    before_action :find_review, only: [:edit, :update, :destroy, :like, :dislike]
+    before_action :find_review, only: [:edit, :update, :destroy, :like, :dislike, :comment]
     
     def new
         @review = Review.new
@@ -53,6 +53,7 @@ class ReviewsController < ApplicationController
       end
       redirect_to product_path(@product)
     end
+    
 
 
     private

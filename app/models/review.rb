@@ -1,6 +1,7 @@
 class Review < ApplicationRecord
     belongs_to :product
     has_many :likes
+    has_many :comments
 
     def like_count
         likes.count 

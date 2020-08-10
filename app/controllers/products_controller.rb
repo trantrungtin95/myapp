@@ -72,22 +72,6 @@ class ProductsController < ApplicationController
     redirect_to product_path(@product)
   end
 
-  # def luotxem_count
-  #   @luotxems.count
-  # end
-  
-
-  # def self.searches(pattern)
-  #   if pattern.blank?  
-  #     all
-  #   else
-  #     where('name LIKE ?', "%#{pattern}%")
-  #   end
-  # end
-  
-  # def search
-  #   Product.find_title(params['q'])
-  # end
 
 
   private

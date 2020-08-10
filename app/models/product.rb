@@ -23,6 +23,8 @@ class Product < ActiveRecord::Base
     def luotxem_count
         luotxem.count
     end
+
+    
   
      private
   

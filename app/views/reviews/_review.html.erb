@@ -13,4 +13,8 @@
   <%= link_to 'Like', like_product_review_path(@product, review) %>
 <% end %>
 
+<p><%= link_to 'Comment:', new_product_review_comment_path(@product,review)%></p> 
+
+<%= render @revire.comments %>
+
 <hr />
