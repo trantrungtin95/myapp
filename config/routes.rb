@@ -1,12 +1,19 @@
 Rails.application.routes.draw do
+  
   get 'admin/index'
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
-  resources :users
+  resources :users do
+    get :follow, on: :member # Route for 1 objects
+    get :unfollow, on: :member
+  end
   resources :orders
   resources :line_items
   resources :carts
+  # resources :followings, only: [:create] # Default: create 7 actions: index, show, edit, update, create, destroy, new
+  # GET: read data from system
+  # POST/PUT/PATCH/DELETE: change data in system
 
   resources :statics do
     collection do 

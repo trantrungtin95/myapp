@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
 
   # GET /users
   # GET /users.json
@@ -64,6 +64,18 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+
+  def follow
+    # current_user
+    # params: params[:id]
+    Following.create(user_id: params[:id], follower_id: current_user.id)
+    redirect_to user_path(@user)
+  end
+
+  def unfollow
+    Following.where(user_id: params[:id], follower_id: current_user.id).destroy_all
+    redirect_to user_path(@user)
   end
 
   private

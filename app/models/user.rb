@@ -38,6 +38,10 @@ class User < ApplicationRecord
             raise "Can't delete last user"
         end
     end
+
+    def followed?(other_user)
+        Following.where(user_id: other_user.id, follower_id: id).exists?
+    end
  
     private
     def password_must_be_present 

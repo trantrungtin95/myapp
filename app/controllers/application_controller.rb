@@ -16,14 +16,14 @@ class ApplicationController < ActionController::Base
     protected
   
     def authorize
-        @user = User.find_by_id(session[:user_id]) 
-        if @user == nil
+        @current_user = User.find_by(id: session[:user_id]) 
+        if @current_user == nil
             redirect_to '/login', :notice => 'You must login first'
         end
     end
 
     def current_user
-      @user
+      @current_user
     end
     helper_method :current_user
 
