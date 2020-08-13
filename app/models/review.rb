@@ -2,6 +2,7 @@ class Review < ApplicationRecord
     after_create :send_email_to_follower
     has_many :likes
     has_many :comments
+    belongs_to :user
 
     def self.total
         # only call on Review (class)

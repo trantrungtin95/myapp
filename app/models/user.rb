@@ -42,6 +42,11 @@ class User < ApplicationRecord
     def followed?(other_user)
         Following.where(user_id: other_user.id, follower_id: id).exists?
     end
+
+    def followers
+        # TODO: improve performance when db gets bigger
+        Following.where(user_id: id).map(&:follower)
+    end
  
     private
     def password_must_be_present 
