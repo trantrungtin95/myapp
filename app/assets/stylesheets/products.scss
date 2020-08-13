@@ -1,3 +1,18 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#new-review form {
+    border: 2px solid;
+    padding: 4px;
+}
+
+.comment {
+    background-color: #ebf2ed;
+    border-radius: 3px;
+    padding: 3px;
+
+    i {
+        font-size: 8px;
+    }
+}

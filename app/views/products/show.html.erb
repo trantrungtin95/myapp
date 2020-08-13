@@ -36,8 +36,9 @@
     </div>
 </p>
 <p>
+  <div id='new-review'></div>
     <div>
-      <%= link_to "Add Review", new_product_review_path(@product)%>
+      <%= link_to "Add Review", new_product_review_path(@product), remote: true %>
     </div>
 </p>
 
@@ -47,7 +48,10 @@
 
 
 
-<%= render @product.reviews %>
+<div id='review-list'>
+  <%= render @product.reviews %>
+</div>
+
 
   
 
