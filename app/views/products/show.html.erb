@@ -28,6 +28,15 @@
 <%= link_to 'Back', products_path %>
 <p>
     <div>
+    <% if @product.favorite_by?(current_user)%>
+      <%= link_to 'Dis Favorite', disfavorite_product_path(@product), data: { confirm: 'Are you sure?' }%>
+      <% else %>
+      <%= link_to 'Favorite', favorite_product_path(@product)%>
+      <% end %>
+    </div>
+</p>
+<p>
+    <div>
       <%= link_to "Add Review", new_product_review_path(@product)%>
     </div>
 </p>

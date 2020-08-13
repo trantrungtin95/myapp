@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users do
     get :follow, on: :member # Route for 1 objects
     get :unfollow, on: :member
+    resources :favorite
   end
   resources :orders
   resources :line_items
@@ -30,6 +31,8 @@ Rails.application.routes.draw do
       resources :comments
     end
     get :luotxem, on: :member
+    get :favorite, on: :member
+    get :disfavorite, on: :member
   end
   root :to => 'store#index'
   get 'say/hello'

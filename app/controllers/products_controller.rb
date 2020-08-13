@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :luotxem]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :luotxem, :favorite, :disfavorite]
 
   # GET /products
   # GET /products.json
@@ -73,6 +73,21 @@ class ProductsController < ApplicationController
     end
   end
 
+  def favorite
+    if @product.favorite_by?(current_user)
+      # do nothing
+    else
+      @product.favorites.create(user_id: current_user.id)
+    end
+    redirect_to product_path(@product)
+    end
+
+    def disfavorite
+      if @product.favorite_by?(current_user)
+        @product.favorites.where(user_id: current_user.id).destroy_all
+      end
+      redirect_to product_path(@product)
+    end
 
 
   private
