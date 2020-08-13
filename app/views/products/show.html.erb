@@ -26,8 +26,11 @@
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
-
-
+<p>
+    <div>
+      <%= link_to "Add Review", new_product_review_path(@product)%>
+    </div>
+</p>
 
 <div class="row">
 
@@ -39,8 +42,5 @@
 
   
 
-    <div>
-      <%= link_to "Add Review", new_product_review_path(@product)%>
-    </div>
   </div>
 </div>
