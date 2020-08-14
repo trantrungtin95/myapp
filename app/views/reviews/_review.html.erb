@@ -20,7 +20,7 @@
     </div>
 </p> 
 <div id='list_comment'>
-<%= render review.comments %>
+<%= render review.comments.order('created_at desc') %>
 </div>
 
 <hr />

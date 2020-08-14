@@ -8,12 +8,8 @@ class CommentsController < ApplicationController
 
     def create
         @comment = Comment.new(comment_params)
-
-        if @comment.save
-            redirect_to product_path(@product)
-        else
-            render 'new'
-        end
+        @comment.review_id = params[:review_id]
+        @comment.save
     end
 
     def destroy
