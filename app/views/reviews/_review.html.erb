@@ -13,8 +13,14 @@
   <%= link_to 'Like', like_product_review_path(@product, review) %>
 <% end %>
 
-<p><%= link_to 'Comment:', new_product_review_comment_path(@product, review)%></p> 
-
+<p>
+  <div id='new_comment'></div>
+    <div>
+      <%= link_to "Comment:", new_product_review_comment_path(@product, review), remote: true %>
+    </div>
+</p> 
+<div id='list_comment'>
 <%= render review.comments %>
+</div>
 
 <hr />
