@@ -49,7 +49,7 @@
 
 
 <div id='review-list'>
-  <%= render @product.reviews %>
+  <%= render @product.reviews.order('created_at desc') %>
 </div>
 
 
