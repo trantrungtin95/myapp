@@ -3,6 +3,7 @@ require 'digest/sha2'
 class User < ApplicationRecord
     has_many :reviews
     has_many :comments
+    has_many :bookcases
     validates :name, :presence => true, :uniqueness => true
     validates :password, :confirmation => true
     attr_accessor :password_confirmation

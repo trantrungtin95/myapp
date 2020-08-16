@@ -4,12 +4,16 @@ class CommentsController < ApplicationController
 
     def new
         @comment = Comment.new
+        @parent_comment = Comment.find_by(id: params[:comment_id])
     end
 
     def create
+        # TODO: append properly to parent comment
         @comment = Comment.new(comment_params)
         @comment.review_id = params[:review_id]
         @comment.save
+
+
     end
 
     def destroy
@@ -32,7 +36,7 @@ class CommentsController < ApplicationController
     private
 
       def comment_params
-        params.require(:comment).permit( :user_id, :review_id, :content)
+        params.require(:comment).permit( :user_id, :review_id, :content, :comment_id)
       end
 
       def find_review

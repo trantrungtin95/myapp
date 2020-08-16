@@ -1,1 +1,5 @@
-$('#new_comment').html('<%= j(render('form'))%>');
+<% if @parent_comment.present? %>
+  $('#comment-<%= @parent_comment.id %> ').append('<%= j(render('form'))%>');
+<% else %>
+  $('#new_comment').html('<%= j(render('form'))%>');
+<% end %>

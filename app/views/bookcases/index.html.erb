@@ -1,0 +1,36 @@
+<div id="book_list">
+    <h1>My Bookcase</h1>
+
+
+    <table>
+    <% Bookcase.where(user_id: current_user.id).each do |bookcase| %>
+        <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+  
+            <td>
+                <%= image_tag(bookcase.image_url, :class => 'list_image') %>
+            </td>
+  
+            <td class="list_description">
+                <dl>
+                    <dt><%= bookcase.title%></dt>
+                    <dd><%= truncate(strip_tags(bookcase.description),
+                            :length => 80) %></dd>
+                </dl>
+            </td>
+    
+            <td class="list_actions">
+                <%= link_to 'Show', user_bookcase_path(bookcase.user, bookcase) %><br/>
+                <%= link_to 'Edit', edit_user_bookcase_path(bookcase.user, bookcase) %><br/>
+                <%= link_to 'Destroy', user_bookcase_path(bookcase.user, bookcase), 
+                    data: { confirm: 'Are you sure?' },
+                    :method => :delete %>
+            </td>
+        </tr>
+    <% end %>
+    </table>
+</div>
+ 
+<br />
+ 
+<%= link_to 'Add Book', new_user_bookcase_path %>
+<p><%= will_paginate @bookcases %></p>

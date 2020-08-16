@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
-  resources :users do
+  
+  resources :users do # /users/8
     get :follow, on: :member # Route for 1 objects
     get :unfollow, on: :member
-    resources :favorite
+    resources :favorite # nested resources. Example: /users/5/favorites/7
+    resources :bookcases
   end
   resources :orders
   resources :line_items
@@ -30,10 +32,12 @@ Rails.application.routes.draw do
       
       resources :comments
     end
+
     get :luotxem, on: :member
     get :favorite, on: :member
     get :disfavorite, on: :member
   end
+
   root :to => 'store#index'
   get 'say/hello'
   get 'say/goodbye'

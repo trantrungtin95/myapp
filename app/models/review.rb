@@ -27,6 +27,10 @@ class Review < ApplicationRecord
     def users_like
         likes.map{|like| like.user.name }
     end
+
+    def root_comments
+        comments.where(comment_id: nil)
+    end
 private
     def send_email_to_follower
         NotificationMailer.send_email(self).deliver

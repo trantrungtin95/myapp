@@ -3,5 +3,6 @@
   <%= f.input :content %>
   <%= f.input :user_id, as: :hidden, :input_html => {:value => current_user.id } %>
   <%= f.input :review_id, as: :hidden, :input_html => {:value => @review.id } %>
+  <%= f.input :comment_id, as: :hidden, :input_html => {:value => @parent_comment&.id } %>
   <%= f.button :submit %>
 <% end %>

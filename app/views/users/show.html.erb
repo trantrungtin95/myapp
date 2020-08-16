@@ -18,6 +18,14 @@
   </strong>
 </p>
 
+<p>
+  <strong>
+    <% if @user.id == current_user.id %>
+      <%= link_to 'My Bookcase', user_bookcases_path(@user.id) %>
+    <% end %>
+  </strong>
+</p>
+
 <% if @user.id != current_user.id %>
   <% if current_user.followed?(@user) %>
     <%= link_to 'Un-Follow', unfollow_user_path(@user.id)%>
