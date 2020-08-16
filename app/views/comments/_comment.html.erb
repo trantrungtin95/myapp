@@ -1,14 +1,2 @@
-<p class='comment' id='comment-<%= comment.id %>' ><strong><%= comment.user.name %></strong> said: <%= comment.content  %>
-  - <i>created <%= time_ago_in_words(comment.created_at) %> ago</i>
-  <%= link_to 'Reply', new_product_review_comment_path(@product, comment.review, comment_id: comment.id), remote: true %>
-
- </p> 
-
-<% comment.children_comments.each do |children_comment| %>
- <p class='comment children-comment' id='comment-<%= children_comment.id %>' ><strong><%= children_comment.user.name %></strong> said: <%= children_comment.content  %>
-  - <i>created <%= time_ago_in_words(children_comment.created_at) %> ago</i>
-  <%= link_to 'Reply', new_product_review_comment_path(@product, children_comment.review, comment_id: children_comment.id), remote: true %>
-<% end %>
- 
- </p> 
+<%= generate_comment_content(comment) %>
  <hr/>
