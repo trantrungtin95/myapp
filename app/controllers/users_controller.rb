@@ -70,12 +70,12 @@ class UsersController < ApplicationController
   def follow
     # current_user
     # params: params[:id]
-    Following.create(user_id: params[:id], follower_id: current_user.id)
+    Following.create(user_id: params[:id], follower_id: session[:user_id])
     redirect_to user_path(@user)
   end
 
   def unfollow
-    Following.where(user_id: params[:id], follower_id: current_user.id).destroy_all
+    Following.where(user_id: params[:id], follower_id: session[:user_id]).destroy_all
     redirect_to user_path(@user)
   end
 

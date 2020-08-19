@@ -26,7 +26,17 @@
   </strong>
 </p>
 
+<p>
+  <strong>
+    <% if @user.id == session[:user_id] %>
+      <%= link_to 'List Follower', user_followings_path(@user.id) %>
+    <% end %>
+  </strong>
+</p>
+
+
 <% if @user.id != session[:user_id] %>
+  <% current_user = User.find(session[:user_id])%>
   <% if current_user.followed?(@user) %>
     <%= link_to 'Un-Follow', unfollow_user_path(@user.id)%>
   <% else %>
@@ -34,6 +44,7 @@
   <% end %>
   
 <% end %>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<% if @user.id == session[:user_id]%>
+  <%= link_to 'Edit', edit_user_path(@user) %> 
+  <% end %>
 <a href='/'>Back</a>
