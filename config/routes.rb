@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :line_items
   resources :carts
+  resources :user
   # resources :followings, only: [:create] # Default: create 7 actions: index, show, edit, update, create, destroy, new
   # GET: read data from system
   # POST/PUT/PATCH/DELETE: change data in system

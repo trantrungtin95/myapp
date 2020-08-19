@@ -8,15 +8,15 @@
 <p>User name:<%= "#{review.users_like.join(', ')}" %></p>
 
 <% if review.like_by?(current_user) %>
-  <%= link_to 'DisLike', dislike_product_review_path(@product, review)  %>
+  <%= link_to 'DisLike', dislike_product_review_path(@product, review), class:"btn btn-light"  %>
 <% else %>
-  <%= link_to 'Like', like_product_review_path(@product, review) %>
+  <%= link_to 'Like', like_product_review_path(@product, review), class:"btn btn-link" %>
 <% end %>
 
 <p>
-  <div id='new_comment'></div>
+  <div id='new_comment_<%= review.id %>'></div>
     <div>
-      <%= link_to "Comment:", new_product_review_comment_path(@product, review), remote: true %>
+      <%= link_to "Comment:", new_product_review_comment_path(@product, review), remote: true, class:"btn btn-info" %>
     </div>
 </p> 
 <div id='list_comment'>

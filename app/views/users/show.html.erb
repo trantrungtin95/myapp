@@ -12,7 +12,7 @@
 
 <p>
   <strong>
-    <% if @user.id == current_user.id %>
+    <% if @user.id == session[:user_id] %>
         <%= link_to 'List Favorites', user_favorite_index_path(@user.id) %>
     <% end %>
   </strong>
@@ -20,13 +20,13 @@
 
 <p>
   <strong>
-    <% if @user.id == current_user.id %>
+    <% if @user.id == session[:user_id] %>
       <%= link_to 'My Bookcase', user_bookcases_path(@user.id) %>
     <% end %>
   </strong>
 </p>
 
-<% if @user.id != current_user.id %>
+<% if @user.id != session[:user_id] %>
   <% if current_user.followed?(@user) %>
     <%= link_to 'Un-Follow', unfollow_user_path(@user.id)%>
   <% else %>
@@ -36,4 +36,4 @@
 <% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<a href='/'>Back</a>

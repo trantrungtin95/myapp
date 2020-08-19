@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-
-
 <p>
   <strong>Description:</strong>
   <%= @product.description %>
@@ -24,14 +22,15 @@
 <p>View:<%= @product.daxem %></p>
 
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
+<%= link_to 'Back', products_path, class: 'btn btn-warning' %>
+
 <p>
     <div>
     <% if @product.favorite_by?(current_user)%>
-      <%= link_to 'Dis Favorite', disfavorite_product_path(@product), data: { confirm: 'Are you sure?' }%>
+      <%= link_to 'Dis Favorite', disfavorite_product_path(@product), class: 'btn btn-secondary', data: { confirm: 'Are you sure?' }%>
       <% else %>
-      <%= link_to 'Favorite', favorite_product_path(@product)%>
+      <%= link_to 'Favorite', favorite_product_path(@product), class: 'btn btn-success' %>
       <% end %>
     </div>
 </p>
@@ -44,7 +43,7 @@
 
 <div class="row">
 
-  <div class="col-md-4">
+  <div class="col-md-8">
 
 
 

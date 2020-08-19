@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
     puts "======================================"
     @products = Product.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
     if params['q'].present?
-      @products = Product.find_title(params['q'])
+      @products = Product.find_title(params['q']).paginate(:page => params[:page], :per_page => 10).order('created_at desc')
     end
   end
 
