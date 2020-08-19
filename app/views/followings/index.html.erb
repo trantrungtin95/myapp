@@ -1,0 +1,10 @@
+<h1>List Follower</h1>
+
+<table>
+<% Following.where(user_id: current_user.id).each do |following| %>
+  <% follower = User.find(following.follower_id)%>
+  <p>
+  <%= link_to follower.name, user_path(follower.id)%>
+  </p>
+<% end %>
+</table>
