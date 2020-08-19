@@ -10,6 +10,10 @@ class User < ApplicationRecord
     attr_reader :password
   
     validate :password_must_be_present
+
+    DEFAULT_NAME = 'Robert'
+
+    
   
     def User.encrypt_password(password, salt) 
         Digest::SHA2.hexdigest(password + salt)

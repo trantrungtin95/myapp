@@ -1,2 +1,2 @@
-$('#new_comment').empty();
-$('#list_comment').prepend('<%= j(render('comment', comment: @comment)) %>')
+$('form#new_comment').empty();
+$('#children-comment-<%= @comment.comment_id %>').prepend('<%= j(render('comment', comment: @comment)) %>')

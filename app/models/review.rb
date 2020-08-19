@@ -3,6 +3,7 @@ class Review < ApplicationRecord
     has_many :likes
     has_many :comments
     belongs_to :user
+    belongs_to :product
 
     def self.total
         # only call on Review (class)

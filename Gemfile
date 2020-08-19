@@ -25,6 +25,16 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem 'will_paginate', '>= 3.0'
+gem 'simple_form'
+gem 'safe_attributes'
+gem "cocoon"
+gem "closure_tree"
+gem "bootstrap-sass"
+
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'will_paginate-bootstrap4'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -44,6 +54,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'byebug'
+
+  gem "letter_opener"
+  gem 'devise' 
+
 end
 
 group :test do
@@ -57,8 +71,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'will_paginate', '>= 3.0'
-gem 'simple_form'
-gem 'safe_attributes'
-gem "letter_opener", :group => :development
-gem "cocoon"
