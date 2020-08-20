@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_121710) do
+ActiveRecord::Schema.define(version: 2020_08_20_124133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_121710) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "daxem"
     t.integer "user_id"
+    t.boolean "public", default: false
   end
 
   create_table "publics", force: :cascade do |t|

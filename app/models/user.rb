@@ -4,6 +4,9 @@ class User < ApplicationRecord
     has_many :reviews
     has_many :comments
     has_many :bookcases
+    has_many :followings
+    has_many :products
+    has_many :privates
     validates :name, :presence => true, :uniqueness => true
     validates :password, :confirmation => true
     attr_accessor :password_confirmation

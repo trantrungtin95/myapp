@@ -1,11 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :luotxem, :favorite, :disfavorite]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :luotxem, :favorite, :disfavorite, :private, :public]
 
   # GET /products
   # GET /products.json
   def index
     puts "======================================"
-    @products = Product.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
+    @products = Product.where(public: true).paginate(:page => params[:page], :per_page => 10).order('created_at desc')
     if params['q'].present?
       @products = Product.find_title(params['q']).paginate(:page => params[:page], :per_page => 10).order('created_at desc')
     end
@@ -80,16 +80,26 @@ class ProductsController < ApplicationController
       @product.favorites.create(user_id: current_user.id)
     end
     redirect_to product_path(@product)
-    end
+  end
 
-    def disfavorite
-      if @product.favorite_by?(current_user)
-        @product.favorites.where(user_id: current_user.id).destroy_all
-      end
+  def disfavorite
+    if @product.favorite_by?(current_user)
+      @product.favorites.where(user_id: current_user.id).destroy_all
+    end
       redirect_to product_path(@product)
-    end
+  end
 
+  def private
+    @product.update(public: false)
+    redirect_to product_path(@product)
+  end
 
+  def public
+    @product.update(public: true)
+    redirect_to product_path(@product)
+  end
+
+  # keywords
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -98,7 +108,7 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :description, :image_url, :price, :cover)
+      params.require(:product).permit(:title, :description, :image_url, :price, :cover, :user_id)
     end
   
 end  

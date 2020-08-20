@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     get :unfollow, on: :member
     resources :favorite # nested resources. Example: /users/5/favorites/7
     resources :bookcases
+    resources :followings
+    resources :private
+
   end
   resources :orders
   resources :line_items
@@ -37,6 +40,8 @@ Rails.application.routes.draw do
     get :luotxem, on: :member
     get :favorite, on: :member
     get :disfavorite, on: :member
+    get :private, on: :member
+    get :public, on: :member
   end
 
   root :to => 'store#index'

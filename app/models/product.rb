@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
     has_one_attached :cover
     has_many :luotxem
     has_many :favorites
+    belongs_to :user
     validates :title, :description, :image_url, :presence => true
     validates :price, :numericality =>{:greater_than_or_equal_to => 1.0}
     validates :title, :uniqueness => true
@@ -24,7 +25,12 @@ class Product < ActiveRecord::Base
 
     def favorite_by?(user)
         favorites.where(user_id: user.id).exists?
-        end
+    end
+
+    def private_by?(user)
+        Private.where(product_id: self.id, user_id: user.id).exists?
+    end
+    
 
     
   

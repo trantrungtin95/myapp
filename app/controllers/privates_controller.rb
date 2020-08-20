@@ -1,2 +1,0 @@
-class PrivatesController < ApplicationController
-end

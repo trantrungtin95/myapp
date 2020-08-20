@@ -78,6 +78,7 @@ class UsersController < ApplicationController
     Following.where(user_id: params[:id], follower_id: session[:user_id]).destroy_all
     redirect_to user_path(@user)
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
