@@ -32,12 +32,13 @@
             
             <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <%= link_to image_tag(product.image_url), product_path(product), class:"card-img-top"%>
+              
               <div class="card-body">
                 <h4 class="card-title">
                   <%= link_to product.title, product_path(product) %>
                 </h4>
                 <h5><%= product.price %></h5>
+                <%= link_to image_tag(product.image_url, class: 'list-image'), product_path(product), class:"card-img-top"%>
                 <p class="card-text"><%= product.description %></p>
               </div>
               <div class="card-footer">
