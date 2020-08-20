@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize
+  skip_before_action :authorize, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
 
   # GET /users
@@ -20,6 +20,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    # Check permission
+    # unless = if not
+    redirect_to root_path if current_user.id != @user.id
   end
 
   # POST /users

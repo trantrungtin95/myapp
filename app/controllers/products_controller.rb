@@ -30,6 +30,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    redirect_to root_path if current_user.id != @product.user_id
   end
 
   # POST /products
