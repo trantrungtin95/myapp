@@ -7,6 +7,7 @@ class User < ApplicationRecord
     has_many :followings
     has_many :products
     has_many :privates
+    has_one_attached :avatar
     validates :name, :presence => true, :uniqueness => true
     validates :password, :confirmation => true
     attr_accessor :password_confirmation

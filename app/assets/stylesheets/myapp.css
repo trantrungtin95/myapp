@@ -1,3 +1,12 @@
 body {
     padding-top: 56px;
   }
+
+.list-image {
+  width: 200px;
+  height: 200px;
+}
+ .avatar-img {
+   width: 100px;
+   height: 100px;
+ }

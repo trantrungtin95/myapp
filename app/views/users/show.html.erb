@@ -6,6 +6,15 @@
 </p>
 
 <p>
+  <strong>Avatar:</strong>
+</p>
+<p>
+    <%= image_tag @user.avatar, class:"avatar-img" if @user.avatar.present? %>
+
+</p>
+
+
+<p>
   <strong>Email:</strong>
   <%= @user.email%>
 </p>
