@@ -27,8 +27,9 @@
 </p>
 <p>View:<%= @product.daxem %></p>
 
-
+<% if current_user.id == @product.user_id %>
 <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
+<% end %>
 <%= link_to 'Back', products_path, class: 'btn btn-warning' %>
 
 <p>

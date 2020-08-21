@@ -18,7 +18,8 @@ class ReviewsController < ApplicationController
       redirect_to product_path(@product)
     end
     
-    def edit  
+    def edit 
+      redirect_to root_path if current_user.id != @review.user_id 
     end
     
     def update
