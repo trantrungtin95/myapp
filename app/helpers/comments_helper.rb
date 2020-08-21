@@ -11,9 +11,16 @@ module CommentsHelper
     product = comment.review.product
         padding_left = 20 * comment.level
         content = content_tag(:p, style: "padding-left: #{padding_left}px", class: 'comment', id: "comment-#{comment.id}") do
-            tag = content_tag(:strong) do
-                t = link_to comment.user.name, user_path(comment.user)
-            end
+            if comment.user.avatar.present?
+                tag =link_to image_tag(comment.user.avatar, class: "avatar-comment-img"), user_path(comment.user)
+                tag += content_tag(:strong) do
+                    t = link_to comment.user.name, user_path(comment.user)
+                end
+            else
+                tag = content_tag(:strong) do
+                    t = link_to comment.user.name, user_path(comment.user)
+                end
+            end 
             tag += content_tag(:strong, " said: ")
             tag += comment.content
             tag +=" - "
