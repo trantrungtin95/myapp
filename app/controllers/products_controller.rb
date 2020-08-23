@@ -20,7 +20,10 @@ class ProductsController < ApplicationController
     
     new_views = (@product.daxem.present? ? @product.daxem : 0) + 1
     @product.update(daxem: new_views)
-    ###
+    if current_user.id == @product.user_id || @product.public == true
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /products/new
@@ -109,7 +112,7 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :description, :image_url, :price, :cover, :user_id)
+      params.require(:product).permit(:title, :description, :image_url, :price, :cover, :user_id, :pdf)
     end
   
 end  

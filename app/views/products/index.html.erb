@@ -4,6 +4,7 @@
 
     <table>
     <% @products.each do |product| %>
+      <% if product.public == true %>
         <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
             <td>
                 <%= link_to image_tag(product.image_url, :class => 'list-image'), product_path(product) %>
@@ -11,7 +12,7 @@
   
             <td class="list_description">
                 <dl>
-                    <dt><%= product.title%></dt>
+                    <dt><%= link_to product.title, product_path(product)%></dt>
                     <dd><%= truncate(strip_tags(product.description),
                             :length => 80) %></dd>
                 </dl>
@@ -26,6 +27,7 @@
                     <% end %>
             </td>
         </tr>
+      <% end %>
     <% end %>
     </table>
 </div>

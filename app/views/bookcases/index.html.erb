@@ -19,7 +19,6 @@
             </td>
     
             <td class="list_actions">
-                <%= link_to 'Show', product_path(product) %><br/>
                 <%= link_to 'Edit', edit_product_path(product) %><br/>
                 <%= link_to 'Destroy', product, 
                     data: { confirm: 'Are you sure?' },
@@ -31,6 +30,8 @@
 </div>
  
 <br />
- 
-<%= link_to 'Add Book', new_product_path %>
+ <p>
+   <%= link_to 'Add Book', new_product_path %>
+ </p>
+<%= link_to 'Back', user_path(current_user)%>
 <p><%= will_paginate @products %></p>
