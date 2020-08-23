@@ -31,6 +31,8 @@ gem 'safe_attributes'
 gem "cocoon"
 gem "closure_tree"
 gem "bootstrap-sass"
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 gem 'bootstrap'
 gem 'jquery-rails'

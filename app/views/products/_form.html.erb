@@ -32,6 +32,11 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :pdf %><br>
+    <%= form.file_field :pdf %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :price %><br>
     <%= form.text_field :price, class: "form-control" %>
   </div>

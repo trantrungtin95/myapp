@@ -15,3 +15,17 @@ body {
    width: 20px;
    height: 20px; 
  }
+
+ .cover-img {
+  width: 400px;
+  height: 400px;
+ }
+
+ .img-fluid {
+   width: 500px;
+   height: 500px;
+ }
+ #the-canvas {
+  border: 5px solid black;
+  direction: ltr;
+}

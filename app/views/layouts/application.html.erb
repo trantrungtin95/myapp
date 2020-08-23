@@ -10,6 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.min.js"></script>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -65,9 +67,11 @@
       <div class="col-lg-3">
         <%= render 'layouts/sidebar' %>
 
+
         
 
       </div>
+
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">

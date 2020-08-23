@@ -1,9 +1,13 @@
 class Product < ActiveRecord::Base
     has_many :reviews
+    # attr_reader, attr_writer:
     has_one_attached :cover
+    has_one_attached :pdf
     has_many :luotxem
     has_many :favorites
     belongs_to :user
+    # attr_reader :user_id
+    # attr_writer :user_id
     validates :title, :description, :image_url, :presence => true
     validates :price, :numericality =>{:greater_than_or_equal_to => 1.0}
     validates :title, :uniqueness => true
