@@ -7,6 +7,8 @@ class User < ApplicationRecord
     has_many :followings
     has_many :products
     has_many :privates
+    has_many :visiteds
+    has_many :last_pages
     has_one_attached :avatar
     validates :name, :presence => true, :uniqueness => true
     validates :password, :confirmation => true

@@ -38,6 +38,14 @@
 <p>
   <strong>
     <% if @user.id == session[:user_id] %>
+      <%= link_to 'List books visited', user_visiteds_path(@user.id)%>
+    <% end %>
+  </strong>
+</p>
+
+<p>
+  <strong>
+    <% if @user.id == session[:user_id] %>
       <%= link_to 'List Follower', user_followings_path(@user.id) %>
     <% end %>
   </strong>

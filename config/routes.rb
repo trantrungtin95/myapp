@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :bookcases
     resources :followings
     resources :private
-
+    resources :visiteds
   end
   resources :orders
   resources :line_items
@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   get 'store/index'
   resources :products do
+    get :most_views, on: :collection
     resources :reviews do
       get :like, on: :member  # on: :collection ==> action for many elements
       get :dislike, on: :member
