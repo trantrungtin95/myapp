@@ -98,6 +98,16 @@ ActiveRecord::Schema.define(version: 2020_08_20_124133) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "most_views", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "kind"
+    t.integer "postion"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "day_views"
+    t.integer "week_views"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "name"
     t.text "address"
@@ -124,6 +134,10 @@ ActiveRecord::Schema.define(version: 2020_08_20_124133) do
     t.integer "daxem"
     t.integer "user_id"
     t.boolean "public", default: false
+    t.integer "day_views", default: 0
+    t.integer "week_views"
+    t.integer "month_views", default: 0
+    t.integer "weekviews", default: 0
   end
 
   create_table "publics", force: :cascade do |t|
