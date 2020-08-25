@@ -24,7 +24,7 @@
 </p>
 
 <p>
-File: <%= link_to 'link', rails_blob_path(@product.pdf, disposition: "attachment") if @product.pdf.present? %>
+File: <%= link_to 'link download', rails_blob_path(@product.pdf, disposition: "attachment") if @product.pdf.present? %>
 </p>
 
 <% if @product.pdf.present? %>
@@ -152,7 +152,6 @@ function renderPage(num) {
       }
     });
   });
-
   // Update page counters
   document.getElementById('page_num').textContent = num;
 }

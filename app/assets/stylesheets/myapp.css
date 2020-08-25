@@ -3,8 +3,8 @@ body {
   }
 
 .list-image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
 }
  .avatar-img {
    width: 100px;
@@ -25,7 +25,4 @@ body {
    width: 500px;
    height: 500px;
  }
- #the-canvas {
-  border: 5px solid black;
-  direction: ltr;
-}
+ 
