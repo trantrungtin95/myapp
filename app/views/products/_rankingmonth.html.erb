@@ -1,0 +1,29 @@
+<hr/>
+<table>
+<h3>Ranking of Month : </h3>
+<% @most_month_views_products.each do|product|%>
+<% mostview = MostView.where(product_id: product.id, kind: :month).first %>
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+            <td>
+              <h1>
+                <%= mostview.postion + 1 %>
+              </h1>
+            </td>
+            <td>
+                <%= link_to image_tag(product.image_url, :class => 'list-image'), product_path(product) %> 
+            </td>
+  
+            <td class="list_description">
+                <dl>
+                    <dt><%= link_to product.title, product_path(product)%></dt>
+                    <dd><%= truncate(strip_tags(product.description),
+                            :length => 80) %></dd>
+                </dl>
+            </td>
+            <td>
+            Views of the Month :<%= mostview.day_views%>
+            </td>
+    </tr>
+<% end %>
+</table>
+<hr />

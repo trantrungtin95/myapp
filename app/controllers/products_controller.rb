@@ -5,9 +5,9 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     puts "======================================"
-    @products = Product.where(public: true).paginate(:page => params[:page], :per_page => 10).order('created_at desc')
+    @products = Product.where(public: true).order('created_at desc').paginate(:page => params[:page], :per_page => 10)
     if params['q'].present?
-      @products = Product.find_title(params['q']).paginate(:page => params[:page], :per_page => 10).order('created_at desc')
+      @products = Product.find_title(params['q']).order('created_at desc').paginate(:page => params[:page], :per_page => 10)
     end
   end
 
@@ -19,8 +19,25 @@ class ProductsController < ApplicationController
     # Migrate old data. Script: copy luottxem ---> daxem
     
     new_views = (@product.daxem.present? ? @product.daxem : 0) + 1
-    @product.update(daxem: new_views)
+    new_day_views = (@product.day_views.present? ? @product.day_views : 0) + 1
+    new_week_views = (@product.week_views.present? ? @product.week_views : 0) + 1
+    new_month_views = (@product.month_views.present? ? @product.month_views : 0) + 1
+    @product.update(daxem: new_views, day_views: new_day_views, week_views: new_week_views, month_views: new_month_views)
+    # calculate most view in day (yesterday)
+    # solution: memory, speed
+    # approach 1: create record for each view: ==> cost memory in db
+    # approach 2: create column da_xem_trong_ngay. 
+    #   - tang 1 khi co view. 
+    #   - Het ngay, reset ve 0. Schedule job / Cron job: whenever gem
+    #   - save the results of most view a day. Top 10 products have most views
+    # 
     if current_user.id == @product.user_id || @product.public == true
+      if @product.visited_by?(current_user)
+        Visited.where(user_id: current_user.id, product_id: @product.id).destroy_all 
+        Visited.create(user_id: current_user.id, product_id: @product.id)
+      else
+        Visited.create(user_id: current_user.id, product_id: @product.id)
+      end
     else
       redirect_to root_path
     end
@@ -101,6 +118,13 @@ class ProductsController < ApplicationController
   def public
     @product.update(public: true)
     redirect_to product_path(@product)
+  end
+
+  def most_views
+    @most_day_views_products = MostView.where(kind: :day).order('postion asc').map(&:product)
+    @most_week_views_products = MostView.where(kind: :week).order('postion asc').map(&:product)
+    @most_month_views_products = MostView.where(kind: :month).order('postion asc').map(&:product)
+    # [Mostview(product_id=5] --map--> [Product(id: 5)]
   end
 
   # keywords

@@ -1,0 +1,20 @@
+<div id="main">
+  <div class="container">
+    <h1 class="title-page">RANKING</h1>
+    <div class="group-tabs">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Day</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Week</a></li>
+        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Month</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home"><%= render 'rankingday' %></div>
+        <div role="tabpanel" class="tab-pane" id="profile"><%= render 'rankingweek'%></div>
+        <div role="tabpanel" class="tab-pane" id="messages"><%= render 'rankingmonth'%></div>
+      </div>
+    </div>
+  </div>
+</div>
