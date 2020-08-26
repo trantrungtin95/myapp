@@ -31,13 +31,13 @@ class ProductsController < ApplicationController
     #   - Het ngay, reset ve 0. Schedule job / Cron job: whenever gem
     #   - save the results of most view a day. Top 10 products have most views
     # 
-    if current_user.id == @product.user_id || @product.public == true
-      if @product.visited_by?(current_user)
-        Visited.where(user_id: current_user.id, product_id: @product.id).destroy_all 
-        Visited.create(user_id: current_user.id, product_id: @product.id)
+    if (current_user.id == @product.user_id) || @product.public
+      if visited = Visited.where(user_id: current_user.id, product_id: @product.id).first
+        visited.update(updated_at: Time.now)
       else
         Visited.create(user_id: current_user.id, product_id: @product.id)
       end
+
     else
       redirect_to root_path
     end

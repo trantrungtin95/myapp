@@ -1,6 +1,6 @@
 <h1>List book visited</h1>
 <table>
-    <% Visited.order('created_at desc').where(user_id: current_user.id).each do |visited| %>
+    <% current_user.visiteds.ordered.each do |visited| %>
         <% product = visited.product %>
         <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
   
@@ -16,7 +16,7 @@
                 </dl>
             </td>
             <td>
-              <%= visited.created_at.localtime %>
+              <%= visited.updated_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %>
             </td>
         </tr>
     <% end %>
