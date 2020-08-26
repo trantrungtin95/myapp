@@ -1,4 +1,10 @@
 <p id="notice"><%= notice %></p>
+<div id='product-id' data-id='<%= @product.id %>'></div>
+<% if LastPage.where(user_id: current_user.id, product_id: @product.id).present? %>
+   <div id='last-page' data-id='<%= LastPage.where(user_id: current_user.id, product_id: @product.id).first.page_number %>'></div>
+   <% else %>
+   <div id='last-page' data-id='1'></div>
+<% end %>
 <p>
   <strong>Title:</strong>
   <%= @product.title %>
@@ -34,7 +40,7 @@ File: <%= link_to 'link download', rails_blob_path(@product.pdf, disposition: "a
   <button id="prev">Previous</button>
   <button id="next">Next</button>
   &nbsp; &nbsp;
-  <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+  <span>Page: <span id="page_num" ></span> / <span id="page_count"></span></span>
 </div>
   <canvas id="the-canvas" style="border: 1px solid black; direction: ltr;"></canvas>
 <% end %>
@@ -116,7 +122,7 @@ File: <%= link_to 'link download', rails_blob_path(@product.pdf, disposition: "a
   // Asynchronous download PDF
   //
   var pdfDoc = null,
-    pageNum = 1,
+    pageNum = $('#last-page').data('id'),
     pageRendering = false,
     pageNumPending = null,
     scale = 1.5,
@@ -177,6 +183,12 @@ function onPrevPage() {
   }
   pageNum--;
   queueRenderPage(pageNum);
+  
+  var productId = $('#product-id').data('id');
+  $.post(`/products/${productId}/last_page`, { last_page: pageNum }, function(data) {
+    console.log(data);
+  } ) 
+
 }
 document.getElementById('prev').addEventListener('click', onPrevPage);
 
@@ -189,6 +201,12 @@ function onNextPage() {
   }
   pageNum++;
   queueRenderPage(pageNum);
+
+  // call ajax to save last page
+  var productId = $('#product-id').data('id');
+  $.post(`/products/${productId}/last_page`, { last_page: pageNum }, function(data) {
+    console.log(data);
+  } )
 }
 document.getElementById('next').addEventListener('click', onNextPage);
 

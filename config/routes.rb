@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     get :disfavorite, on: :member
     get :private, on: :member
     get :public, on: :member
+    post :last_page, on: :member
   end
 
   root :to => 'store#index'

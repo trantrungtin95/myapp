@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(version: 2020_08_20_124133) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "last_pages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.integer "page_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "review_id"

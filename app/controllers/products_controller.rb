@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:last_page]
   before_action :set_product, only: [:show, :edit, :update, :destroy, :luotxem, :favorite, :disfavorite, :private, :public]
-
+ 
   # GET /products
   # GET /products.json
   def index
@@ -125,6 +126,16 @@ class ProductsController < ApplicationController
     @most_week_views_products = MostView.where(kind: :week).order('postion asc').map(&:product)
     @most_month_views_products = MostView.where(kind: :month).order('postion asc').map(&:product)
     # [Mostview(product_id=5] --map--> [Product(id: 5)]
+  end
+
+  def last_page
+    # TODO: create last page
+    if last_page = LastPage.where(user_id: current_user.id, product_id: params[:id]).first
+      last_page.update(page_number: params[:last_page])
+    else
+    last_page = LastPage.create(user_id: current_user.id, product_id: params[:id], page_number: params[:last_page])
+    render json: { }, status: :ok
+    end
   end
 
   # keywords
