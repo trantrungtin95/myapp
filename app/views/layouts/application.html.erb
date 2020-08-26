@@ -69,7 +69,16 @@
 
 
         <div class="list-group">
+        <button>
           <%= link_to 'Ranking', most_views_products_path%>
+          </button>
+        </div>
+        <div id="cart">
+               <%= hide_cart_if(current_cart.line_items.empty?, :id => "cart") do %>
+               <p>
+                 <%= render(current_cart) %> 
+               </p>
+               <% end %>
         </div>
         
 

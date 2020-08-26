@@ -42,7 +42,7 @@
                     <p class="card-text"><%= product.description %></p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <%= button_to 'Add to Cart', line_items_path(:product_id => product) %>
                 </div>
               </div>
             </div>
