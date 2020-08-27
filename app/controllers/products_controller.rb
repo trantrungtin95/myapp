@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:last_page]
+  skip_before_action :verify_authenticity_token, only: [:last_page, :bookmark]
   before_action :set_product, only: [:show, :edit, :update, :destroy, :luotxem, :favorite, :disfavorite, :private, :public]
  
   # GET /products
@@ -135,6 +135,14 @@ class ProductsController < ApplicationController
     else
     last_page = LastPage.create(user_id: current_user.id, product_id: params[:id], page_number: params[:last_page])
     render json: { }, status: :ok
+    end
+  end
+
+  def bookmark
+    if bookmart = Bookmark.where(user_id: current_user.id, product_id: params[:id], page_number: params[:page_number]).first
+    else
+      bookmark = Bookmark.create(user_id: current_user.id, product_id: params[:id], page_number: params[:page_number])
+      render json: {}, status: :ok
     end
   end
 

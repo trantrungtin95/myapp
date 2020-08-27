@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     get :private, on: :member
     get :public, on: :member
     post :last_page, on: :member
+    post :bookmark, on: :member
   end
 
   root :to => 'store#index'

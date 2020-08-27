@@ -41,6 +41,16 @@ File: <%= link_to 'link download', rails_blob_path(@product.pdf, disposition: "a
   <button id="next">Next</button>
   &nbsp; &nbsp;
   <span>Page: <span id="page_num" ></span> / <span id="page_count"></span></span>
+  <button id="bookmark">Bookmark</button>
+
+  <nav>
+  List Bookmark:
+      <% Bookmark.where(user_id: current_user.id, product_id: @product.id).each do|bookmark|%>
+        <button class="list_bookmark-" data-class='<%= bookmark.page_number %>'>
+          <%= bookmark.page_number %>
+        </button>
+      <% end %>
+  </nav>
 </div>
   <canvas id="the-canvas" style="border: 1px solid black; direction: ltr;"></canvas>
 <% end %>
@@ -210,6 +220,21 @@ function onNextPage() {
 }
 document.getElementById('next').addEventListener('click', onNextPage);
 
+function onBookmark(num) {
+  var productId = $('#product-id').data('id');
+  $.post(`/products/${productId}/bookmark`, { page_number: pageNum }, function(data) {
+    console.log(data);
+  } )
+  
+}
+document.getElementById('bookmark').addEventListener('click', onBookmark);
+
+function onrenderBookmark() {
+  pageNum = $(this).data('class');
+  queueRenderPage(pageNum);
+  console.log(data);  
+}
+$('button.list_bookmark-').on('click', onrenderBookmark);
 /**
  * Asynchronously downloads PDF.
  */
