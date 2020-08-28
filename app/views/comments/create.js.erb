@@ -1,2 +1,6 @@
 $('form#new_comment').empty();
-$('#children-comment-<%= @comment.comment_id %>').prepend('<%= j(render('comment', comment: @comment)) %>')
+<% if @parent_comment.present? %>
+$('#children-comment-<%= @parent_comment.comment_id %>').prepend('<%= j(render('comment', comment: @comment)) %>')
+<% else %>
+$('#list_comment_<%= @review.id %>').append('<%= j(render('comment', comment: @comment)) %>')
+<% end %>

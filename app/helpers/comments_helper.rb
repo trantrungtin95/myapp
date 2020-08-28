@@ -27,6 +27,8 @@ module CommentsHelper
             tag +=" - "
             tag += content_tag(:i,"created " + time_ago_in_words(comment.created_at) + " ago")
             tag += link_to ' Reply', Rails.application.routes.url_helpers.new_product_review_comment_path(product, comment.review, comment_id: comment.id), remote: true
+             # tag += link_to ' Delete', Rails.application.routes.url_helpers.product_review_comment_path(product, comment.review, comment_id: comment.id),method: :delete, remote: true
+            
         end
     
         # TODO: add level of comment (children comment for alignment)

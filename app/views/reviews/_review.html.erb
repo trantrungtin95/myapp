@@ -25,7 +25,7 @@
       <%= link_to "Comment:", new_product_review_comment_path(@product, review), remote: true, class:"btn btn-info" %>
     </div>
 </p> 
-<div id='list_comment'><hr/>
+<div id='list_comment_<%= review.id %>'><hr/>
 <%= render review.root_comments.order('created_at desc') %>
 </div>
 
