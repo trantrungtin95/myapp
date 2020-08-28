@@ -31,3 +31,7 @@ end
 every 1.month do
   runner "Product.reset_month_views", :environment => (ENV['RAILS_ENV'] || 'development')
 end
+
+every 1.week do
+  runner "Newbook.mail_about_newbooks", :environment => (ENV['RAILS_ENV'] || 'development')
+end

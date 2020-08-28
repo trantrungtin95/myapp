@@ -40,6 +40,10 @@ class Product < ActiveRecord::Base
     def private_by?(user)
         Private.where(product_id: self.id, user_id: user.id).exists?
     end
+
+    def bookmarks(user)
+        Bookmark.where(user_id: user.id, product_id: id)
+    end
     
     def self.reset_day_views
         # TODO: 

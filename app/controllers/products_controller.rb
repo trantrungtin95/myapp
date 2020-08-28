@@ -113,11 +113,13 @@ class ProductsController < ApplicationController
 
   def private
     @product.update(public: false)
+    Newbook.where(product_id: @product.id).destroy_all
     redirect_to product_path(@product)
   end
 
   def public
     @product.update(public: true)
+    Newbook.create(product_id: @product.id)
     redirect_to product_path(@product)
   end
 
