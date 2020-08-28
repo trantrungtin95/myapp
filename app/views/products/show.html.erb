@@ -45,14 +45,23 @@ File: <%= link_to 'link download', rails_blob_path(@product.pdf, disposition: "a
 
   <nav>
   List Bookmark:
-      <% Bookmark.where(user_id: current_user.id, product_id: @product.id).each do|bookmark|%>
-        <button class="list_bookmark-" data-class='<%= bookmark.page_number %>'>
+      <% @product.bookmarks(current_user).each do|bookmark|%>
+        <button class="list_bookmark" data-page-number='<%= bookmark.page_number %>'>
           <%= bookmark.page_number %>
         </button>
       <% end %>
   </nav>
 </div>
   <canvas id="the-canvas" style="border: 1px solid black; direction: ltr;"></canvas>
+  <div id='new-note'></div>
+    <div>
+      <h4>
+        <%= link_to "Add Note: ", new_product_note_path(@product), remote: true %>
+      </h4>
+    </div>
+    <div id='notes-list'>
+      <%= render @product.notes.order('created_at desc') %>
+    </div>
 <% end %>
 <p>
   <strong>Price:</strong>
@@ -230,11 +239,19 @@ function onBookmark(num) {
 document.getElementById('bookmark').addEventListener('click', onBookmark);
 
 function onrenderBookmark() {
-  pageNum = $(this).data('class');
+  pageNum = $(this).data('page-number');
   queueRenderPage(pageNum);
   console.log(data);  
 }
-$('button.list_bookmark-').on('click', onrenderBookmark);
+$('button.list_bookmark').on('click', onrenderBookmark);
+
+/**
+$('button.list_bookmark-').on('click', function(event) {
+  var target = $(event.target);
+
+})
+*/
+
 /**
  * Asynchronously downloads PDF.
  */

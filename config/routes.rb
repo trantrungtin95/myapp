@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'store/index'
   resources :products do
     get :most_views, on: :collection
+    resources :notes
     resources :reviews do
       get :like, on: :member  # on: :collection ==> action for many elements
       get :dislike, on: :member

@@ -1,0 +1,8 @@
+<% note = @product.notes.build %>
+<%= simple_form_for([@product,@note ], remote: true) do |f| %>
+    <%= f.input :user_id, as: :hidden, :input_html => {:value => current_user.id } %>
+    <%= f.input :product_id, as: :hidden, :input_html => {:value => @product.id } %>
+    <%= f.input :content %>
+    <%= f.button :submit %>
+    <%= %>
+<% end %>

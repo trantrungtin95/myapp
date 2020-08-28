@@ -1,0 +1,7 @@
+<p>
+<% if current_user.id == note.user_id %>
+  - <%= note.content %>
+  <%= link_to "Edit", edit_product_note_path(@product, note)%>
+  <%= link_to "Delete", product_note_path(@product, note), method: :delete, remote: true %>
+  <% end %>
+</p>

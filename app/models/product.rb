@@ -8,6 +8,7 @@ class Product < ActiveRecord::Base
     has_many :visiteds
     has_many :last_pages
     has_many :bookmarks
+    has_many :notes
     belongs_to :user, optional: true
     # attr_reader :user_id
     # attr_writer :user_id
