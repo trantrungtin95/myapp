@@ -1,40 +1,35 @@
-<div id="product_list">
-    <h1>Products</h1>
+<div class="container">
+    <h1 class="title-page">PRODUCTS</h1>
+    <div class="group-tabs">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="tab" data-toggle="tab" href="#home"  class="active" ><a aria-controls="home">All Product</a></li>
+        <li role="tab" data-toggle="tab" href="#profile"><a  aria-controls="profile" >Science</a></li>
+        <li role="tab" data-toggle="tab" href="#messages" ><a aria-controls="messages">Life</a></li>
+        <li role="tab" data-toggle="tab" href="#filtered" ><a aria-controls="filtered">Filtered</a></li>
+      </ul>
 
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home"><%= render 'allproduct' %></div>
+        <div role="tabpanel" class="tab-pane" id="profile"><%= render 'sciencebook'%></div>
+        <div role="tabpanel" class="tab-pane" id="messages"><%= render 'lifebook'%></div>
+        <div role="tabpanel" class="tab-pane" id="filtered"><%= render 'filtered'%></div>
+      </div>
+    </div>
+  </div>
 
-    <table>
-    <% @products.each do |product| %>
-      <% if product.public == true %>
-        <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-            <td>
-                <%= link_to image_tag(product.image_url, :class => 'list-image'), product_path(product) %>
-            </td>
-  
-            <td class="list_description">
-                <dl>
-                    <dt><%= link_to product.title, product_path(product)%></dt>
-                    <dd><%= truncate(strip_tags(product.description),
-                            :length => 80) %></dd>
-                </dl>
-            </td>
+<script>
+  $(document).ready(function() {
 
-            
-    
-            <td class="list_actions">
-                <% if current_user.id == product.user_id %>
-                <%= link_to 'Edit', edit_product_path(product) %><br/>
-                <%= link_to 'Destroy', product, 
-                    data: { confirm: 'Are you sure?' },
-                    :method => :delete %>
-                    <% end %>
-            </td>
-        </tr>
-      <% end %>
-    <% end %>
-    </table>
-</div>
- 
-<br />
- 
-<%= link_to 'New product', new_product_path %>
-<p><%= will_paginate @products %></p>
+    $('li[data-toggle="tab"]').on('click', function(event) {
+      $('li[data-toggle="tab"]').removeClass('active');
+      $(event.target).parent().addClass('active');
+
+      var tabContentId = $(event.target).parent().attr('href');
+      $('.tab-content .tab-pane').removeClass('active');
+      $('.tab-content ' + tabContentId).addClass('active');
+    })
+
+  })
+</script>

@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_132351) do
     t.integer "week_views"
     t.integer "month_views", default: 0
     t.integer "weekviews", default: 0
+    t.string "classify", default: "life"
   end
 
   create_table "publics", force: :cascade do |t|
