@@ -7,8 +7,13 @@ class ProductsController < ApplicationController
   def index
     puts "======================================"
     @products = Product.where(public: true).order('created_at desc').paginate(:page => params[:page], :per_page => 10)
+    @filtered_products = []
     if params['q'].present?
       @products = Product.find_title(params['q']).order('created_at desc').paginate(:page => params[:page], :per_page => 10)
+    end
+    if params['tag_ids'].present?
+      params['tag_ids'].delete("")
+      @filtered_products = Product.find_tags(params['tag_ids']).order('created_at desc').paginate(:page => params[:page], :per_page => 10)
     end
   end
 
@@ -58,7 +63,6 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
-
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }

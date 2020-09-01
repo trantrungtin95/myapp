@@ -14,7 +14,7 @@
         <div role="tabpanel" class="tab-pane active" id="home"><%= render 'allproduct' %></div>
         <div role="tabpanel" class="tab-pane" id="profile"><%= render 'sciencebook'%></div>
         <div role="tabpanel" class="tab-pane" id="messages"><%= render 'lifebook'%></div>
-        <div role="tabpanel" class="tab-pane" id="filtered"><%= render 'filtered'%></div>
+        <div role="tabpanel" class="tab-pane" id="filtered"><%= render 'filtered' %></div>
       </div>
     </div>
   </div>
@@ -30,6 +30,8 @@
       $('.tab-content .tab-pane').removeClass('active');
       $('.tab-content ' + tabContentId).addClass('active');
     })
+
+    //$('#filtered-form').attr('data-remote', 'false')
 
   })
 </script>

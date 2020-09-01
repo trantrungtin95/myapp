@@ -12,6 +12,19 @@
   <% end %>
 
   <div class="form-group">
+    <%= form.label :classify %><br>
+    <%= form.select :classify, Product::CLASSIFYS , class: "form-control" %>
+  </div>
+  
+  <h4>Tag:</h4>
+   
+
+  <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :attribute_name) do |tag_field| %>
+    <%= tag_field.label { tag_field.check_box } %>
+    <%= tag_field.object.attribute_name %>
+  <% end %>
+
+  <div class="form-group">
     <%= form.label :title %><br>
     <%= form.text_field :title, class: "form-control" %>
   </div>

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
 
   get 'store/index'
+  resources :tags
   resources :products do
     get :most_views, on: :collection
     resources :notes

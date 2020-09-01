@@ -11,6 +11,14 @@
   
 </p>
 
+<p>
+  <strong>Tags:</strong>
+  <% @product.tags.each do |tag| %>
+    <%= link_to tag.attribute_name,tag_path(tag.id) %>,
+  <% end %>
+  
+</p>
+
 
 <p>
   <strong>Description:</strong>

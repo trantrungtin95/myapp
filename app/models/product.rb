@@ -28,7 +28,11 @@ class Product < ActiveRecord::Base
     has_many :line_items
     before_destroy :check_if_has_line_item
 
-    scope :find_title, ->(search){where "title iLIKE ?", "%#{search}%"}
+    scope :find_title, -> (search) {where "title iLIKE ?", "%#{search}%"}
+    scope :find_tags, -> (tag_ids) { 
+        joins(:tags).where('tags.id in (?)', tag_ids).group('products.id').having('count(*) >= ?', tag_ids.length)
+        }
+    
     # Ex:- scope :active, -> {where(:active => true)}
 
     # def luotxem
@@ -50,6 +54,7 @@ class Product < ActiveRecord::Base
     def bookmarks(user)
         Bookmark.where(user_id: user.id, product_id: id)
     end
+
     
     def self.reset_day_views
         # TODO: 
