@@ -3,18 +3,23 @@ class Product < ActiveRecord::Base
     # attr_reader, attr_writer:
     has_one_attached :cover
     has_one_attached :pdf
+    has_one_attached :audio
     has_many :luotxem
     has_many :favorites
     has_many :visiteds
     has_many :last_pages
     has_many :bookmarks
     has_many :notes
+    has_many :product_tags, dependent: :destroy
+    has_many :tags, through: :product_tags
+    accepts_nested_attributes_for :product_tags, allow_destroy: true
     belongs_to :user, optional: true
     # attr_reader :user_id
     # attr_writer :user_id
     validates :title, :description, :image_url, :presence => true
     validates :price, :numericality =>{:greater_than_or_equal_to => 1.0}
     validates :title, :uniqueness => true
+    CLASSIFYS = [:science, :life]
     # validates :image_url, :format =>{
     #     :with => %r{\.(gif|jpg|png|jpeg)\Z}i,
     #     :message => 'Chi nhan file GIF, JPG, PNG, JPEG'

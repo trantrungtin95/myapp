@@ -34,35 +34,53 @@ File: <%= link_to 'link download', rails_blob_path(@product.pdf, disposition: "a
 </p>
 
 <% if @product.pdf.present? %>
-<script src="'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js'"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js"></script>
 
-<div>
-  <button id="prev">Previous</button>
-  <button id="next">Next</button>
-  &nbsp; &nbsp;
-  <span>Page: <span id="page_num" ></span> / <span id="page_count"></span></span>
-  <button id="bookmark">Bookmark</button>
+  <div>
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+    &nbsp; &nbsp;
+    <span>Page: <span id="page_num" ></span> / <span id="page_count"></span></span>
+    <button id="bookmark">Bookmark</button>
 
-  <nav>
-  List Bookmark:
-      <% @product.bookmarks(current_user).each do|bookmark|%>
-        <button class="list_bookmark" data-page-number='<%= bookmark.page_number %>'>
-          <%= bookmark.page_number %>
-        </button>
-      <% end %>
-  </nav>
-</div>
-  <canvas id="the-canvas" style="border: 1px solid black; direction: ltr;"></canvas>
-  <div id='new-note'></div>
-    <div>
-      <h4>
-        <%= link_to "Add Note: ", new_product_note_path(@product), remote: true %>
-      </h4>
+    <nav>
+    List Bookmark:
+        <% @product.bookmarks(current_user).each do|bookmark|%>
+          <button class="list_bookmark" data-page-number='<%= bookmark.page_number %>'>
+            <%= bookmark.page_number %>
+          </button>
+        <% end %>
+    </nav>
+  </div>
+
+  <div id='pdf-content'>
+    <canvas id="the-canvas" style="border: 1px solid black; direction: ltr;"></canvas>
+    
+    <div id='note-content'>
+    <div id='new-note'></div>
+      <div>
+        <h4>
+          <%= link_to "Add Note: ", new_product_note_path(@product), remote: true %>
+        </h4>
+      </div>
+      <div id='notes-list'>
+        <%= render @product.notes.order('created_at desc') %>
+      </div>
     </div>
-    <div id='notes-list'>
-      <%= render @product.notes.order('created_at desc') %>
-    </div>
+  </div>
+
 <% end %>
+
+<p>
+<strong>Audio:</strong>
+<% if @product.audio.present? %>
+  <audio controls>
+    <source src="<%= rails_blob_path(@product.audio) %>" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+<% end%>
+</p>
+
 <p>
   <strong>Price:</strong>
   <%= @product.price %>
@@ -127,7 +145,6 @@ File: <%= link_to 'link download', rails_blob_path(@product.pdf, disposition: "a
 
 <script id="script">
   var  url= '<%= rails_blob_path(@product.pdf) if @product.pdf.present? %>';
-
   // var url = 'http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9JYTJWNVNTSWhhbUV5YW1wbGVqaGtjMkpxT1dOa2QyVnJibmMxZG1NNGQzaDVNQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWTJsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW10bGVXSnZZWEprTFhOb2IzSjBZM1YwY3kxdFlXTnZjeTV3WkdZaU95Qm1hV3hsYm1GdFpTbzlWVlJHTFRnbkoydGxlV0p2WVhKa0xYTm9iM0owWTNWMGN5MXRZV052Y3k1d1pHWUdPd1pVT2hGamIyNTBaVzUwWDNSNWNHVkpJaFJoY0hCc2FXTmhkR2x2Ymk5d1pHWUdPd1pVIiwiZXhwIjoiMjAyMC0wOC0yMlQwODoxMjoyMi4xMDNaIiwicHVyIjoiYmxvYl9rZXkifX0=--a9136cdebe8db0f7d3a9d8710acbf32d9269efea/keyboard-shortcuts-macos.pdf?content_type=application%2Fpdf&disposition=inline%3B+filename%3D%22keyboard-shortcuts-macos.pdf%22%3B+filename%2A%3DUTF-8%27%27keyboard-shortcuts-macos.pdf';
   
   console.log(url);
@@ -265,3 +282,4 @@ pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
 
   }
 </script>
+
