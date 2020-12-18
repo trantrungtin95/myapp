@@ -31,7 +31,8 @@
       $('.tab-content ' + tabContentId).addClass('active');
     })
 
-    //$('#filtered-form').attr('data-remote', 'false')
+    $('#filtered-form').attr('data-remote', 'false')
+    $('#filtered-book').prepend('<%= j(render 'filteredbook') %>')
 
   })
 </script>

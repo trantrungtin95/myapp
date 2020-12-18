@@ -89,7 +89,7 @@ class Product < ActiveRecord::Base
     end
     
   
-     private
+    private
   
     def check_if_has_line_item
         if line_items.empty?
