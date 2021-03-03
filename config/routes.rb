@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   
   get 'admin/index'
   get 'sessions/new'
-  get 'sessions/create'
-  get 'sessions/destroy'
+  post 'sessions/create'
+  delete 'sessions/destroy'
   
   resources :users do # /users/8
     get :follow, on: :member # Route for 1 objects
@@ -69,8 +69,7 @@ Rails.application.routes.draw do
     resources :products do
         get :who_bought, :on => :member
     end
-    root :to => 'store#index', :as => 'store'
-end
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

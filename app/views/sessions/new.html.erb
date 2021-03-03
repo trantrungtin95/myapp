@@ -6,27 +6,27 @@
     <% if notice %>
         <p id="notice"><%= notice %></p>
     <% end %>
-    <%= form_tag '/login' do %>
+    <form action="/login" method="post">
         <fieldset>
             <legend>Log In</legend>
   
             <div>
                 <label for="name">Name:</label>
-                <%= text_field_tag :name, params[:name] %>
+                <input type="text" id="name" name="name" value="<%= params[:name] %>">
             </div>
   
             <div>
                 <label for="password">Password:</label>
-                <%= password_field_tag :password, params[:password] %>
+                <input type="password" id="password" name="password" value="<%= params[:password] %>">
             </div>
   
             <div>
-                <%= submit_tag "Login" %>
+                <input type="submit" value="Login">
             
 
             
                 <%= link_to 'New User', new_user_path %>
             </div>
         </fieldset>
-    <% end %>
+    </form>
 </div>

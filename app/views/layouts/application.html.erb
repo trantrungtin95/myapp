@@ -18,48 +18,43 @@
 
   <body id="store">
 <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="/">Book Store</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div align="right">
-        <%= form_tag(products_path, :method => "get") do %>
-          <%= label_tag(:q,"Search:")%>
-          <%= text_field_tag(:q)%>
-          <%= submit_tag("Search")%>
-        <% end %>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="/" style="background-color: white">Book Store</a>
       </div>
-
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home
-            </a>    
-          </li>
-          <% if session[:user_id] %>
-          <li class="nav-item">
-            <%= link_to 'User', user_path(session[:user_id]), class: 'nav-link' %>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'Log Out', sessions_destroy_path, class: 'nav-link'%>
-          </li>
-          <% else %>
-          <li class="nav-item">
-            <%= link_to 'Log In', sessions_new_path, class: 'nav-link'%>
-          </li>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <% if !@current_user.nil?%>
+            <li name="tab"><a href="/users/<%= session[:user_id] %>">User</a></li>
           <% end %>
-          <li class="nav-item">
-            <%= link_to 'FAQ', faq_statics_path, class: 'nav-link'%>
-          </li>
+          <li name="tab"><a href="/statics/faq">FAQ</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if @current_user.nil? %>
+            <li><a href="/login">Login</a></li>
+          <% else %>
+            <li><%= link_to 'Logout', '/logout', :method => :delete %></li>
+          <% end %>
         </ul>
       </div>
     </div>
   </nav>
+  
 
   <div class="container-fluid">
+    <div align="right">
+      <%= form_tag(products_path, :method => "get") do %>
+        <%= label_tag(:q,"Search:")%>
+        <%= text_field_tag(:q)%>
+        <%= submit_tag("Search")%>
+      <% end %>
+    </div>
 
     <div class="row">
 
