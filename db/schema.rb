@@ -172,7 +172,7 @@ ActiveRecord::Schema.define(version: 2020_08_29_025833) do
     t.integer "user_id"
     t.boolean "public", default: false
     t.integer "day_views", default: 0
-    t.integer "week_views"
+    t.integer "week_views", default: 0
     t.integer "month_views", default: 0
     t.integer "weekviews", default: 0
     t.string "classify", default: "life"
@@ -225,11 +225,6 @@ ActiveRecord::Schema.define(version: 2020_08_29_025833) do
     t.integer "user_id"
     t.integer "product_id"
     t.integer "like"
-  end
-
-  create_table "searches", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|
