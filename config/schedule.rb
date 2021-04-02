@@ -20,7 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 # set :environment_variable, (ENV['RAILS_ENV'] || 'development')
 
-every 1.day do
+every 1.minute do
   runner "Product.reset_day_views", :environment => (ENV['RAILS_ENV'] || 'development')
 end
 
